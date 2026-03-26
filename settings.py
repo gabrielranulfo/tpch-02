@@ -32,10 +32,10 @@ class Run(BaseSettings):
     polars_eager: bool = False
     polars_streaming: bool = False
 
-    modin_memory: int = 8_000_000_000  # Tune as needed for optimal performance
+    modin_memory: int = 60_000_000_000  # Tune as needed for optimal performance
 
-    spark_driver_memory: str = "2g"  # Tune as needed for optimal performance
-    spark_executor_memory: str = "1g"  # Tune as needed for optimal performance
+    spark_driver_memory: str = "25g"  # Tune as needed for optimal performance
+    spark_executor_memory: str = "35g"  # Tune as needed for optimal performance
     spark_log_level: str = "ERROR"
 
     @computed_field  # type: ignore[misc]
@@ -50,7 +50,7 @@ class Run(BaseSettings):
 
 class Plot(BaseSettings):
     show: bool = False
-    n_queries: int = 7
+    n_queries: int = 22
     y_limit: float | None = None
 
     model_config = SettingsConfigDict(
