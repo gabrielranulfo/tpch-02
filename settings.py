@@ -4,6 +4,8 @@ from typing import Literal, TypeAlias
 from pydantic import computed_field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+import os
+
 IoType: TypeAlias = Literal["skip", "parquet", "feather", "csv"]
 
 
@@ -34,8 +36,9 @@ class Run(BaseSettings):
 
     modin_memory: int = 60_000_000_000  # Tune as needed for optimal performance
 
-    spark_driver_memory: str = "25g"  # Tune as needed for optimal performance
-    spark_executor_memory: str = "35g"  # Tune as needed for optimal performance
+    spark_driver_memory: str = os.getenv("SPARK_DRIVER_MEMORY", "4g")
+    spark_executor_memory: str = os.getenv("SPARK_EXECUTOR_MEMORY", "55g")
+    
     spark_log_level: str = "ERROR"
 
     @computed_field  # type: ignore[misc]
